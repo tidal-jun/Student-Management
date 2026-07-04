@@ -1,0 +1,31 @@
+异常处理
+• 全局异常处理器
+异常报错的流程是底层抛出到上层，最后由Controller返回给前端框架，前端会显示在控制台
+但前端返回在控制台不会显示于界面上，用户体验就会很差，所以必须要try catch处理异常并且返回Result结果值给前端
+但如果每一个Controller 都try catch就会显得很繁琐，不灵活， 这个时候就可以使用 “全局异常处理器”
+
+            正常结果                     异常结果
+    👇       👆                           👆
+   ⌈------------⌉               ⌈---------------⌉
+   | Controller |  -------- 👉  | 全局异常处理器 |
+   ⌊------------⌋               ⌊---------------⌋
+    👇       👆
+   ⌈------------⌉
+   |  Service   |
+   ⌊------------⌋
+    👇       👆
+   ⌈------------⌉
+   |   Mapper   |
+   ⌊------------⌋
+
+
+
+   @Slf4j
+   @RestControllerAdvice  = @ControllerAdvice + @ResponseBody
+   public class GlobalExceptionHandler {
+       @ExceptionHandler
+       public Result handleException(Exception e){
+           log.error("全局异常处理器，拦截到异常", e);
+           return Result.error("对不起,服务器异常,请稍后重试");
+       }
+   }

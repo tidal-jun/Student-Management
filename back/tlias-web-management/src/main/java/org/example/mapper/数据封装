@@ -1,0 +1,32 @@
+    /**
+     * 查询所有部门数据
+     */
+    @Select("select id, name, create_time, update_time from dept order by update_time desc ")
+    List<Dept> findAll();
+
+
+这里只要满数据库字段名和实体类的的属性名相等或者是满足驼峰命名，数据库就可以自动映射数据
+但如果不满足该条件，就需要手动封装数据
+
+方式一 ： - 手动结果映射：通过 @Results及@Result 进行手动结果映射。
+
+@Results({
+    @Result(column = "create_time", property = "createTime"),
+    @Result(column = "update_time", property = "updateTime")
+})
+//column写入数据库字段名， property写入要映射的属性名
+@Select("select id, name, create_time, update_time from dept order by update_time desc")
+public List<Dept> findAll();
+
+
+方式二 ： - 起别名： 在SQL语句中，对不一样的列名起别名， 别名和实体类属性名一样
+@Select("select id, name, create_time createTime, update_time updateTime from dept order by update_time desc")
+public List<Dept> findAll();
+
+
+方式三 ： - 开启驼峰命名： 如果字段名和属性名符合驼峰命名规则， mybatis会自动通过驼峰命名规则映射
+mybatis
+ congiguration
+  map-underscore-to-camel-case: true
+
+xxx_abc => xxxAbc

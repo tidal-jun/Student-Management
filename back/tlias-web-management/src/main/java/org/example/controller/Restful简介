@@ -1,0 +1,31 @@
+Restful
+- REST (REpresentational State Transfer)，表述性状态转换，它是一种软件架构风格。
+
+|                 传统风格url                 | 请求方式 |        含义        |      备注      |
+|--------------------------------------------|----------|--------------------|----------------|
+| http://localhost:8080/user/getById?id=1    | GET      | 查询id为1的用户     | 不规范 难维护  |
+| http://localhost:8080/user/saveUser        | POST     | 新增用户            |                |
+| http://localhost:8080/user/updateUser      | POST     | 修改用户            |                |
+| http://localhost:8080/user/deleteUser?id=1 | GET      | 删除id为1的用户     |                |
+
+|               REST风格url           | 请求方式  |        含义        |             备注             |
+|-------------------------------------|----------|--------------------|------------------------------|
+| http://localhost:8080/users/1       | GET      | 查询id为1的用户    | URL定位资源 HTTP动词描述操作 简洁、规范、优雅 |
+| http://localhost:8080/users/1       | DELETE   | 删除id为1的用户    |                              |
+| http://localhost:8080/users         | POST     | 新增用户           |                              |
+| http://localhost:8080/users         | PUT      | 修改用户           |                              |
+
+
+注意：
+1. REST是风格，是约定方式，约定不是规定，可以打破。
+2. 描述功能模块通常使用复数形式（加s），表示此类资源，而非单个资源。如：users、books...
+
+1. REST风格的特点？
+- URL定义资源
+- HTTP动词描述操作
+
+2. REST风格中的四种请求方式及对应的操作？
+- GET：查询
+- POST：新增
+- PUT：修改
+- DELETE：删除
